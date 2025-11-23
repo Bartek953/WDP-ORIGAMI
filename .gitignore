@@ -1,2 +1,5 @@
 wzo
 tests/
+wzo.dSYM/
+t.out
+script.py
