@@ -3,3 +3,5 @@ tests/
 wzo.dSYM/
 t.out
 script.py
+origami-tests/
+tt

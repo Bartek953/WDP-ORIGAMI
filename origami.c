@@ -7,7 +7,7 @@
 //i will be treating vectors as points and points as vectors
 
 double get_epsilon(void){
-    return 0.000000001; //10^-9
+    return 0.00000001; //10^-8
 }
 double absolute(double x){
     if(x < 0)
@@ -203,17 +203,23 @@ void print_figure(figure* object){
 }
 
 bool in_figure(vector point, figure* object){
-    if(object->type == CIRCLE && vector_length(substract_vectors(point, object->point1)) <= object->r){
+    //printf("odl: %lf\n", vector_length(substract_vectors(point, object->point1)));
+    if(object->type == CIRCLE 
+    && vector_length(substract_vectors(point, object->point1)) <= object->r + get_epsilon()){
         return true;
     }
-    if(object->type == RECTANGLE && object->point1.x <= point.x && point.x <= object->point2.x
-    && object->point1.y <= point.y && point.y <= object->point2.y){
+    if(object->type == RECTANGLE 
+    && object->point1.x <= point.x  + get_epsilon()  
+    && point.x <= object->point2.x  + get_epsilon()
+    && object->point1.y <= point.y  + get_epsilon() 
+    && point.y <= object->point2.y  + get_epsilon()){
         return true;
     }
     return false;
 }
 
 void calc_res(figure* origami, fold* curr_fold, vector point, int* result){
+    //print_vector(point, '\n');
     if(curr_fold == NULL){
         if(in_figure(point, origami)){
             (*result)++;

@@ -1,17 +1,18 @@
 gcc @opcje_mac origami.c -o wzo
 
-dir=tests/custom
-start=0
-end=9
+dir=origami-tests/random/float_test
+start=1
+end=4000
 
+echo "$dir"
 
 for((i=$start;i<=$end;i++))
 do
     echo "test $i"
-    MallocNanoZone=0 ./wzo < $dir/$i.in > t.out
+    MallocNanoZone=0 ./wzo < $dir/ori$i.in > t.out
     #cat out
     #cat $dir/$i.out
-    diff -b t.out $dir/$i.out || break
+    diff -b t.out $dir/ori$i.out || break
     echo "OK"
     echo ""
 done
